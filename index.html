@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ambulance Booking Service - Quick, Reliable Medical Assistance</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      background-color: #f4f4f4;
+      background-image: url(bg1.jpg);
+      object-fit: cover;
+
+    }
+
+
+
+    .marquee {
+      background-color: #000;
+      color: #fff;
+      padding: 5px 0;
+      font-size: 0.9rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      z-index: 1001;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 10s linear infinite;
+    }
+
+    .marquee:hover span {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #14141454;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      color: #ff3c00;
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+      filter: brightness(0) saturate(100%) invert(82%) sepia(27%) saturate(346%) hue-rotate(93deg) brightness(88%) contrast(92%);
+     
+    }
+
+
+    .search-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input {
+      padding: 0.6rem 2.5rem 0.6rem 1rem;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .search-bar i {
+      position: absolute;
+      right: 10px;
+      font-size: 1.2rem;
+      color: #666;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .search-bar i:hover {
+      color: #00c897;
+    }
+
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: #db1616;
+      transform: scale(1.1);
+    }
+
+
+    .toggle-btn {
+      display: none;
+      font-size: 1.8rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+
+    .social-icons {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 1.2rem;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #00c897;
+      transform: scale(1.2);
+    }
+
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 100px;
+        right: -100%;
+        flex-direction: column;
+        background-color: #3333336b;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        gap: 2rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+
+      }
+
+
+      .nav-links.active,
+      .social-icons.active {
+        right: 0;
+      }
+
+      .toggle-btn {
+        display: block;
+      }
+    }
+
+
+
+    .hero {
+      background: url('ambulance-bg.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .hero-content h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .hero-content p {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .hero-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-content input {
+      padding: 10px;
+      width: 300px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-content button {
+      padding: 10px 20px;
+      background-color: #00a3cc;
+      color: rgb(189, 150, 150);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero-content button:hover {
+      background-color: #007399;
+    }
+
+
+    section {
+      padding: 60px 0;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+    }
+
+    .services-grid,
+    .team-grid,
+    .hospital-grid,
+    .faq-grid {
+      display: flex;
+      gap: 30px;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .service-item,
+    .team-member,
+    .hospital-item,
+    .faq-item {
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: calc(33.333% - 60px);
+    }
+
+    footer {
+      background-color: #00a3cc;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #007399;
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+
+      .services-grid,
+      .team-grid,
+      .hospital-grid,
+      .faq-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .service-item,
+      .team-member,
+      .hospital-item,
+      .faq-item {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .hero-content input {
+        width: 100%;
+      }
+    }
+
+    .feedback-section {
+      background-color: #f7f7f7;
+      padding: 30px 0;
+    }
+
+    .feedback-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .feedback-input {
+      width: 100%;
+      min-height: 100px;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+      resize: none;
+      background-color: #f1f1f1;
+      font-size: 16px;
+    }
+
+    .feedback-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .send-icon {
+      margin-right: 8px;
+    }
+
+    .feedback-btn:hover {
+      background-color: #45a049;
+    }
+
+    .contact-section {
+      background-color: #ffffff;
+      padding: 60px 0;
+      color: #333;
+    }
+
+    .contact-section h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      color: #00a3cc;
+    }
+
+    .contact-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    form {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    form button {
+      background-color: #00a3cc;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #007399;
+    }
+
+    .contact-info {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .contact-info h3 {
+      font-size: 24px;
+      color: #00a3cc;
+      margin-bottom: 10px;
+    }
+
+    .contact-info p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+
+    @media (max-width: 768px) {
+      .contact-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-info {
+        max-width: 100%;
+        text-align: center;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+
+
+
+    .hero {
+      background: url('ambulance-bg.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .hero-content p {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .hero-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-content input {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s ease;
+    }
+
+    .hero-content input:focus {
+      border-color: #00a3cc;
+      outline: none;
+    }
+
+    .hero-content button {
+      padding: 10px 20px;
+      background-color: #00a3cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero-content button:hover {
+      background-color: #007399;
+      transform: scale(1.05);
+    }
+
+
+    section {
+      padding: 60px 0;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+    }
+
+
+    .services-grid,
+    .team-grid,
+    .hospital-grid,
+    .faq-grid {
+      display: flex;
+      gap: 30px;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .service-item,
+    .team-member,
+    .hospital-item,
+    .faq-item {
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: calc(33.333% - 60px);
+      transition: transform 0.3s ease;
+    }
+
+    .service-item img,
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .service-item:hover,
+    .team-member:hover,
+    .hospital-item:hover,
+    .faq-item:hover {
+      transform: scale(1.05);
+    }
+
+
+    footer {
+      background-color: #00a3cc;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #007399;
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+
+      .services-grid,
+      .team-grid,
+      .hospital-grid,
+      .faq-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .service-item,
+      .team-member,
+      .hospital-item,
+      .faq-item {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .hero-content input {
+        width: 100%;
+      }
+    }
+
+    .feedback-section {
+      background-color: #f7f7f7;
+      padding: 30px 0;
+    }
+
+    .feedback-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .feedback-input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      resize: vertical;
+      height: 100px;
+    }
+
+    .feedback-btn {
+      padding: 10px 20px;
+      background-color: #ea3636;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .feedback-btn:hover {
+      background-color: #007399;
+      transform: scale(1.05);
+    }
+
+    .send-icon {
+      margin-right: 10px;
+    }
+
+    .wrapper {
+      display: inline-flex;
+      list-style: none;
+      height: 120px;
+      width: 100%;
+      padding-top: 40px;
+      font-family: "Poppins", sans-serif;
+      justify-content: center;
+    }
+
+    .wrapper .icon {
+      position: relative;
+      background: #fff;
+      border-radius: 50%;
+      margin: 10px;
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .tooltip {
+      position: absolute;
+      top: 0;
+      font-size: 14px;
+      background: #fff;
+      color: #fff;
+      padding: 5px 8px;
+      border-radius: 5px;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .tooltip::before {
+      position: absolute;
+      content: "";
+      height: 8px;
+      width: 8px;
+      background: #fff;
+      bottom: -3px;
+      left: 50%;
+      transform: translate(-50%) rotate(45deg);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .icon:hover .tooltip {
+      top: -45px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .wrapper .icon:hover span,
+    .wrapper .icon:hover .tooltip {
+      text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .wrapper .facebook:hover,
+    .wrapper .facebook:hover .tooltip,
+    .wrapper .facebook:hover .tooltip::before {
+      background: #1877f2;
+      color: #fff;
+    }
+
+    .wrapper .twitter:hover,
+    .wrapper .twitter:hover .tooltip,
+    .wrapper .twitter:hover .tooltip::before {
+      background: #1da1f2;
+      color: #fff;
+    }
+
+    .wrapper .instagram:hover,
+    .wrapper .instagram:hover .tooltip,
+    .wrapper .instagram:hover .tooltip::before {
+      background: #e4405f;
+      color: #fff;
+    }
+
+
+
+
+    .hospital-body {
+      background-color: #ffffff;
+      color: #ECF0F1;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .hospital-container {
+      text-align: center;
+      width: 100%;
+    }
+
+    .hospital-heading {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #E74C3C;
+      animation: hospital-fadeInDown 1s ease-in-out;
+    }
+
+    .hospital-text {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      color: #3b5b70;
+      animation: hospital-fadeInUp 1s ease-in-out;
+    }
+
+    .hospital-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .hospital-item {
+      background-color: #000000;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      position: relative;
+      transition: transform 0.5s, box-shadow 0.5s;
+      overflow: hidden;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .hospital-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(118, 28, 18, 0.5);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .hospital-item:hover::before {
+      transform: scaleY(1);
+    }
+
+    .hospital-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .hospital-item h3 {
+      font-size: 1.8rem;
+      color: #E74C3C;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hospital-item p {
+      font-size: 1rem;
+      color: #ECF0F1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hospital-item p:last-child {
+      font-style: italic;
+      color: #95A5A6;
+    }
+
+    .hospital-btn {
+      padding: 12px 25px;
+      background-color: #E74C3C;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      margin-top: 20px;
+    }
+
+    .hospital-btn:hover {
+      background-color: #C0392B;
+      transform: translateY(-3px);
+    }
+
+    @keyframes hospital-fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes hospital-fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .faq-wrapper {
+      max-width: 75%;
+      margin: 3rem auto;
+      background-color: #f7f5f5;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-wrapper {
+      max-width: 75%;
+      margin: 3rem auto;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-wrapper > p,
+    .faq-wrapper > h1 {
+      margin: 1.5rem 0;
+      text-align: center;
+      color: #333;
+    }
+
+    .faq-wrapper > h1 {
+      letter-spacing: 3px;
+      font-size: 2.5rem;
+      color: #2c3e50;
+    }
+
+    .question {
+      background-color: #f9f9f9;
+      color: rgba(0, 0, 0, 0.8);
+      cursor: pointer;
+      font-size: 1.2rem;
+      width: 100%;
+      padding: 1.8rem 2.5rem;
+      border: none;
+      outline: none;
+      transition: background-color 0.4s ease-in-out, transform 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      position: relative;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+
+    .question i {
+      font-size: 1.6rem;
+      transition: transform 0.4s ease;
+      color: #3498db;
+    }
+
+    .faq.active .question i {
+      transform: rotate(180deg);
+    }
+
+    .faq.active .question {
+      background-color: #eaf9f5;
+      transform: scale(1.02);
+    }
+
+    .faq-content {
+      padding: 0 2rem;
+      background-color: #f1f7f5;
+      display: none;
+      overflow: hidden;
+      transition: max-height 0.4s ease-in-out;
+    }
+
+    .faq-content p {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 1.2rem;
+      line-height: 1.6;
+      padding-bottom: 1.8rem;
+    }
+
+    .faq {
+      margin: 10px 0;
+      border-radius: 5px;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+
+    .faq:hover .question {
+      background-color: #f4faf7;
+    }
+
+    .faq-content.active {
+      display: block;
+    }
+
+
+    .faq.active .question i {
+      content: "\f00d"; 
+    }
+
+    .question .icon {
+      font-size: 1.6rem;
+      transition: transform 0.4s ease-in-out, color 0.4s ease-in-out;
+    }
+
+    .faq.active .question .icon {
+      transform: rotate(45deg);
+      color: #e74c3c;
+    }
+
+    #btn {
+      background-color: #c73030;
+      ;
+    }
+
+    #btn:hover {
+      background-color: #9e4444;
+    }
+
+    .hello-body {
+      background-color: #ede8e8;
+      background: linear-gradient(to right, #ffffff, #f6f6f6);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .hello-container {
+      text-align: center;
+      color: #a47777;
+      margin-bottom: 50px;
+    }
+
+    h2.hello-heading {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #d3303b;
+      animation: hello-fadeInDown 1.5s ease-in-out;
+    }
+
+    p.hello-text {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: #d3303b;
+      animation: hello-fadeInUp 1.5s ease-in-out;
+    }
+
+    .hello-card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 20px;
+      perspective: 1000px;
+      justify-items: center;
+      width: 90%;
+    }
+
+    .hello-card {
+      width: 280px;
+      height: 380px;
+      background: linear-gradient(135deg, #e8b3ad, #c83232);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .hello-card:hover {
+      transform: rotateY(15deg) rotateX(10deg) translateY(-20px);
+      box-shadow: 0 20px 40px rgba(39, 38, 38, 0.5);
+    }
+
+    .hello-card img {
+      width: 100%;
+      height: 60%;
+      object-fit: cover;
+    }
+
+    .hello-card-content {
+      padding: 20px;
+      text-align: center;
+      color: white;
+      background: rgba(211, 45, 45, 0.7);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(100%);
+      transition: transform 0.6s ease-in-out;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .hello-card:hover .hello-card-content {
+      transform: translateY(0);
+    }
+
+    .hello-card h1 {
+      font-size: 1.7rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .hello-card p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .hello-card .hello-phone {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .hello-btn {
+      padding: 10px 30px;
+      background-color: #E74C3C;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .hello-btn:hover {
+      background-color: #C0392B;
+      transform: translateY(-5px);
+    }
+
+    @keyframes hello-fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes hello-fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #foot {
+      background-color: rgb(221, 46, 46);
+    }
+
+    .faqs {
+      background-color: white;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+}
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <div class="body4">
+      <div class="marquee">
+        <span>WE OFFER OF ALL TYPES AUMBULANCE</span>
+      </div>
+
+      <header>
+        <nav class="navbar">
+
+          <div class="logo">
+            <img src="image-removebg-preview (2).png" alt="LifeLink Logo" />
+            LifeLink
+          </div>
+
+
+          <div class="search-bar">
+            <input type="text" placeholder="Search..." />
+            <i class="fa fa-search"></i>
+          </div>
+
+
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+
+
+          <div class="social-icons">
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com/"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+
+
+          <div class="toggle-btn">
+            <i class="fa fa-bars"></i>
+          </div>
+        </nav>
+      </header>
+
+
+      <section id="home" class="hero">
+        <div class="hero-content">
+          <h1>Quick & Reliable Ambulance Booking</h1>
+          <p>Fast, easy, and reliable ambulance services at your fingertips. Book now for immediate medical assistance.
+          </p>
+          <form id="bookingForm">
+            <input list="locations" id="location" placeholder="Enter your location">
+            <datalist id="locations">
+              <option value="Clifton">Clifton</option>
+              <option value="Defence (DHA)">Defence (DHA)</option>
+              <option value="Saddar">Saddar</option>
+              <option value="Gulshan-e-Iqbal">Gulshan-e-Iqbal</option>
+              <option value="Gulistan-e-Johar">Gulistan-e-Johar</option>
+              <option value="Korangi">Korangi</option>
+              <option value="Landhi">Landhi</option>
+              <option value="Lyari">Lyari</option>
+              <option value="Malir">Malir</option>
+              <option value="North Nazimabad">North Nazimabad</option>
+              <option value="Liaquatabad">Liaquatabad</option>
+              <option value="Shah Faisal Colony">Shah Faisal Colony</option>
+              <option value="PECHS">PECHS (Pakistan Employees Cooperative Housing Society)</option>
+              <option value="Federal B Area">Federal B Area</option>
+              <option value="North Karachi">North Karachi</option>
+              <option value="Surjani Town">Surjani Town</option>
+              <option value="Orangi Town">Orangi Town</option>
+              <option value="Korangi Creek">Korangi Creek</option>
+              <option value="Kemari">Kemari</option>
+              <option value="Hawksbay">Hawksbay</option>
+              <option value="Sea View">Sea View</option>
+              <option value="Ibrahim Hyderi">Ibrahim Hyderi</option>
+              <option value="Karsaz">Karsaz</option>
+              <option value="Shadman Town">Shadman Town</option>
+              <option value="Ayesha Manzil">Ayesha Manzil</option>
+              <option value="Tariq Road">Tariq Road</option>
+              <option value="Bahadurabad">Bahadurabad</option>
+              <option value="Mehmoodabad">Mehmoodabad</option>
+              <option value="Nazimabad">Nazimabad</option>
+              <option value="Safoora Goth">Safoora Goth</option>
+              <option value="Model Colony">Model Colony</option>
+              <option value="Gulbai">Gulbai</option>
+              <option value="Manghopir">Manghopir</option>
+              <option value="Gadap Town">Gadap Town</option>
+              <option value="M.A. Jinnah Road">M.A. Jinnah Road</option>
+              <option value="Gulshan-e-Maymar">Gulshan-e-Maymar</option>
+              <option value="Garden">Garden</option>
+              <option value="PIB Colony">PIB Colony</option>
+              <option value="Karachi Cantonment">Karachi Cantonment</option>
+            </datalist>
+            <a href="booknowform.html"> <button id="btn" class="bok">Book Now</button></a>
+          </form>
+          <div id="bookingDetails"></div>
+        </div>
+      </section>
+    </div>
+
+
+
+   
+
+    <div class="hospital-body">
+      <section id="hospital-section" class="hospital-section">
+        <div class="hospital-container">
+          <h2 class="hospital-heading">Hospitals We Partner With</h2>
+          <p class="hospital-text">Our service is partnered with top hospitals in the region to ensure you receive the
+            best care possible.</p>
+          <div class="hospital-grid">
+            <div class="hospital-item">
+              <h3 class="hospital-heading">City General Hospital</h3>
+              <p class="p">Providing world-class healthcare with state-of-the-art facilities.</p>
+              <p class="p">Location: 123 Main Street, City</p>
+              <p class="p">Contact: (123) 456-7890</p>
+            </div>
+            <div class="hospital-item">
+              <h3 class="hospital-heading">Green Valley Clinic</h3>
+              <p class="p">Specialized in emergency and trauma care, available 24/7.</p>
+              <p class="p">Location: 456 Elm Street, City</p>
+              <p class="p">Contact: (123) 456-7891</p>
+            </div>
+            <div class="hospital-item">
+              <h3 class="hospital-heading">Downtown Medical Center</h3>
+              <p class="p">Offering comprehensive care for all medical conditions.</p>
+              <p class="p">Location: 789 Oak Street, City</p>
+              <p class="p">Contact: (123) 456-7892</p>
+            </div>
+            <div class="hospital-item">
+              <h3 class="hospital-heading">Redwood Health Facility</h3>
+              <p class="p">Specialists in urgent care and complex surgeries.</p>
+              <p class="p">Location: 101 Pine Street, City</p>
+              <p class="p">Contact: (123) 456-7893</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+
+    <div class="hello-body">
+      <section id="hello-doctor" class="hello-section">
+        <div class="hello-container">
+          <h2 class="hello-heading">Emergency Ambulance Service</h2>
+          <p class="hello-text">Need urgent medical help? Contact our ambulance services for quick and reliable support
+            in any medical emergency. Our team is ready to assist you 24/7.</p>
+          <button class="hello-btn">Call Ambulance Now</button>
+        </div>
+      </section>
+
+      <div class="hello-card-container">
+        <div class="hello-card">
+          <img src="i (6).webp" alt="Doctor">
+          <center>
+            <h1 id="doctorss">PEADIATRICIAN</h1>
+          </center>
+          <div class="hello-card-content">
+            <h1>Dr. Sarah Lee</h1>
+            <p>Chief Medical Officer</p>
+            <p class="hello-phone">+123 456 7890</p>
+          </div>
+        </div>
+        <div class="hello-card">
+          <img src="i (7).webp" alt="Paramedic">
+          <center>
+            <h1 id="doctorss">DENTISTS</h1>
+          </center>
+          <div class="hello-card-content">
+            <h1>John Doe</h1>
+            <p>Senior Paramedic</p>
+            <p class="hello-phone">+123 456 7891</p>
+          </div>
+        </div>
+        <div class="hello-card">
+          <img src="i (9).webp" alt="Driver">
+          <center>
+            <h1 id="doctorss">AMBULANCE CREW</h1>
+          </center>
+          <div class="hello-card-content">
+            <h1>Michael Smith</h1>
+            <p>Ambulance Driver</p>
+            <p class="hello-phone">+123 456 7892</p>
+          </div>
+        </div>
+        <div class="hello-card">
+          <img src="i (10).webp" alt="Nurse">
+          <center>
+            <h1 id="doctorss">AMBULANCE CREW</h1>
+          </center>
+          <div class="hello-card-content">
+            <h1>Emma Brown</h1>
+            <p>Head Nurse</p>
+            <p class="hello-phone">+123 456 7893</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-wrapper">
+      <p>Welcome to the New Era of Emergency Services</p>
+      <h1>Frequently Asked Questions</h1>
+
+      <div class="faq">
+        <button class="question">
+          How do I book an ambulance?
+          <i class="fa-solid fa-chevron-down icon"></i>
+        </button>
+        <div class="faq-content">
+          <p>
+            Simply fill out the form with your location details, and we’ll dispatch an ambulance to you immediately.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <button class="question">
+          Are your services available 24/7?
+          <i class="fa-solid fa-chevron-down icon"></i>
+        </button>
+        <div class="faq-content">
+          <p>
+            Yes, our ambulances operate 24/7 across the city and surrounding regions.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <button class="question">
+          Can I choose a hospital?
+          <i class="fa-solid fa-chevron-down icon"></i>
+        </button>
+        <div class="faq-content">
+          <p>
+            Yes, you can specify the hospital during booking, or we can take you to the nearest available medical facility.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <section id="feedback" class="feedback-section">
+      <div class="container">
+        <h2>Send Us Your Feedback</h2>
+        <div class="feedback-grid">
+          <form id="feedbackForm">
+            <textarea class="feedback-input" placeholder="What's Your Feedback?" required></textarea>
+            <button type="submit" class="feedback-btn">
+              <svg viewBox="0 0 512 512" height="20px" xmlns="http://www.w3.org/2000/svg" class="send-icon">
+                <path
+                  d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm177.6 62.1C192.8 334.5 218.8 352 256 352s63.2-17.5 78.4-33.9c9-9.7 24.2-10.4 33.9-1.4s10.4 24.2 1.4 33.9c-22 23.8-60 49.4-113.6 49.4s-91.7-25.5-113.6-49.4c-9-9.7-8.4-24.9 1.4-33.9s24.9-8.4 33.9 1.4zm40-89.3l0 0 0 0-.2-.2c-.2-.2-.4-.5-.7-.9c-.6-.8-1.6-2-2.8-3.4c-2.5-2.8-6-6.6-10.2-10.3c-8.8-7.8-18.8-14-27.7-14s-18.9 6.2-27.7 14c-4.2 3.7-7.7 7.5-10.2 10.3c-1.2 1.4-2.2 2.6-2.8 3.4c-.3 .4-.6 .7-.7 .9l-.2 .2 0 0 0 0 0 0c-2.1 2.8-5.7 3.9-8.9 2.8s-5.5-4.1-5.5-7.6c0-17.9 6.7-35.6 16.6-48.8c9.8-13 23.9-23.2 39.4-23.2s29.6 10.2 39.4 23.2c9.9 13.2 16.6 30.9 16.6 48.8c0 3.4-2.2 6.5-5.5 7.6s-6.8-.1-8.9-2.8z" />
+              </svg>
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>company</h4>
+            <ul>
+              <li><a href="#">about us</a></li>
+              <li><a href="#">our services</a></li>
+              <li><a href="#">privacy policy</a></li>
+              <li><a href="#">affiliate program</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>get help</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">shipping</a></li>
+              <li><a href="#">returns</a></li>
+              <li><a href="#">order status</a></li>
+              <li><a href="#">payment options</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>online shop</h4>
+            <ul>
+              <li><a href="#">watch</a></li>
+              <li><a href="#">bag</a></li>
+              <li><a href="#">shoes</a></li>
+              <li><a href="#">dress</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </footer>
+ 
+
+
+
+  </body>
+
+</html>
+
+</body>
+
+<script>
+
+  const toggleBtn = document.querySelector(".toggle-btn i");
+  const navLinks = document.querySelector(".nav-links");
+  const socialIcons = document.querySelector(".social-icons");
+
+  toggleBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    socialIcons.classList.toggle("active");
+    toggleBtn.classList.toggle("fa-times");
+  });
+
+  function validateAndRedirect(event) {
+    event.preventDefault();
+    let locationInput = document.getElementById("location");
+    let loc = locationInput.value.trim();
+    if (loc === "") {
+      alert("Please input this field");
+      return false;
+    } else {
+
+      window.location.href = 'booknowform.html';
+    }
+  }
+  document.getElementById("btn").addEventListener("click", validateAndRedirect)
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    alert(`Thank you, ${name}, for reaching out to us. We will respond to you shortly.`);
+    document.getElementById('contactForm').reset();
+  });
+
+
+  var faqQuestions = document.getElementsByClassName("question");
+
+  for (var i = 0; i < faqQuestions.length; i++) {
+    faqQuestions[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      this.parentElement.classList.toggle("active");
+
+      var faqContent = this.nextElementSibling;
+      if (faqContent.style.display === "block") {
+        faqContent.style.display = "none";
+      } else {
+        faqContent.style.display = "block";
+      }
+
+
+      var icon = this.querySelector(".icon");
+      if (this.classList.contains("active")) {
+        icon.classList.replace("fa-chevron-down", "fa-times");
+      } else {
+        icon.classList.replace("fa-times", "fa-chevron-down");
+      }
+    });
+  }
+
+
+
+</script>
+
+
+</html>

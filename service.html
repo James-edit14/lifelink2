@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambulance Services</title>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        /* Marquee Styling */
+        .marquee {
+            background-color: #000;
+            color: #fff;
+            padding: 5px 0;
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            z-index: 1001; 
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 10s linear infinite;
+        }
+
+        .marquee:hover span {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #14141454;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            color: #ff3c00;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px; /* Increased logo size */
+            margin-right: 10px;
+            filter: brightness(0) saturate(100%) invert(82%) sepia(27%) saturate(346%) hue-rotate(93deg) brightness(88%) contrast(92%); /* Adjust color */
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-bar i {
+            position: absolute;
+            right: 10px;
+            font-size: 1.2rem;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-bar i:hover {
+            color: #00c897;
+        }
+
+        /* Nav Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #db1616;
+            transform: scale(1.1);
+        }
+
+        .toggle-btn {
+            display: none;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.2rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #00c897;
+            transform: scale(1.2);
+        }
+
+        /* Card Container */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Four cards per row */
+            gap: 30px;
+            margin-top: 150px; /* Adjusted for fixed navbar */
+            padding: 0 50px;
+        }
+
+        .card {
+            height: 350px;
+            perspective: 1000px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin-bottom: 20%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-front,
+        .card-back {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: white;
+            position: absolute;
+            backface-visibility: hidden;
+            transition: transform 0.6s ease;
+        }
+
+        .card-front {
+            background-color: #9b1111;
+        }
+
+        .card-back {
+            background-color: #df918f;
+            transform: rotateY(180deg);
+            text-align: center;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .card:hover .card-front {
+            transform: rotateY(180deg);
+        }
+
+        .card:hover .card-back {
+            transform: rotateY(0deg);
+        }
+
+        h3 {
+            margin: 15px 0;
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        /* Mobile Styling */
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr); /* Two cards per row for smaller screens */
+            }
+
+            /* Responsive Navbar */
+            .nav-links,
+            .social-icons {
+                position: absolute;
+                top: 60px;
+                right: -100%;
+                flex-direction: column;
+                background-color: #3333336b;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+
+            .nav-links.active,
+            .social-icons.active {
+                right: 0;
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+
+            .toggle-btn i {
+                color: white;
+                font-size: 2rem;
+            }
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body{
+            line-height: 1.5;
+            font-family: 'Poppins', sans-serif;
+        }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .container{
+            max-width: 1170px;
+            margin:auto;
+        }
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        ul{
+            list-style: none;
+        }
+        .footer{
+            background-color: #24262b;
+            padding: 70px 0;
+        }
+        .footer-col{
+           width: 25%;
+           padding: 0 15px;
+        }
+        .footer-col h4{
+            font-size: 18px;
+            color: #ffffff;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+        .footer-col h4::before{
+            content: '';
+            position: absolute;
+            left:0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+        .footer-col ul li:not(:last-child){
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 300;
+            color: #bbbbbb;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+            color: #ffffff;
+            padding-left: 8px;
+        }
+        .footer-col .social-links a{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin:0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+        .footer-col .social-links a:hover{
+            color: #24262b;
+            background-color: #ffffff;
+        }
+        
+        /*responsive*/
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+        
+        
+        
+        
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="marquee">
+        <span>WE OFFER ALL TYPES OF AMBULANCE SERVICES 24/7!</span>
+    </div>
+
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="image-removebg-preview (2).png" alt="LifeLink Logo" />
+                LifeLink
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." />
+                <i class="fa fa-search"></i>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <div class="toggle-btn">
+                <i class="fa fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="card-container">
+        <div class="card">
+            <div class="card-front">
+                <img src="i (10).webp" alt="Emergency Ambulance" class="card-image">
+                <h3>Emergency Ambulance</h3>
+            </div>
+            <div class="card-back">
+                <p>Quick response vehicles with advanced life-saving equipment for critical emergencies.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-front">
+                <img src="i (11).webp" alt="Patient Transfer" class="card-image">
+                <h3>Patient Transfer</h3>
+            </div>
+            <div class="card-back">
+                <p>Safe and reliable non-emergency patient transport to hospitals, clinics, or homes.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-front">
+                <img src="i (12).webp" alt="Air Ambulance" class="card-image">
+                <h3>Air Ambulance</h3>
+            </div>
+            <div class="card-back">
+                <p>Fast, specialized air transport for long-distance or critical cases.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-front">
+                <img src="neonatal.png" alt="Neonatal Ambulance" class="card-image">
+                <h3>Neonatal Ambulance</h3>
+            </div>
+            <div class="card-back">
+                <p>Ambulances specially designed for infants, equipped with advanced neonatal care.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-front">
+                <img src="20150725_200753.jpg" alt="Event Medical Coverage" class="card-image">
+                <h3>Event Medical Coverage</h3>
+            </div>
+            <div class="card-back">
+                <p>Professional medical teams and vehicles ready to provide care during events.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-front">
+                <img src="i (10).webp" alt="Long-Distance Ambulance" class="card-image">
+                <h3>Long-Distance Ambulance</h3>
+            </div>
+            <div class="card-back">
+                <p>Comfortable and safe long-distance patient transport with medical assistance.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-front">
+                <img src="images (1).png" alt="Basic Life Support Ambulance" class="card-image">
+                <h3>Basic Life Support (BLS)</h3>
+            </div>
+            <div class="card-back">
+                <p>For non-critical patient transfers requiring basic medical monitoring and care.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-front">
+                <img src="mourtary aumbulance1.jpeg" alt="Mortuary Ambulance" class="card-image">
+                <h3>Mortuary Ambulance</h3>
+            </div>
+            <div class="card-back">
+                <p>Compassionate and professional services for transporting the deceased with dignity.</p>
+            </div>
+        </div>
+    </div>
+
+    
+  <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col">
+                <h4>company</h4>
+                <ul>
+                    <li><a href="#">about us</a></li>
+                    <li><a href="#">our services</a></li>
+                    <li><a href="#">privacy policy</a></li>
+                    <li><a href="#">affiliate program</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>get help</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">shipping</a></li>
+                    <li><a href="#">returns</a></li>
+                    <li><a href="#">order status</a></li>
+                    <li><a href="#">payment options</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>online shop</h4>
+                <ul>
+                    <li><a href="#">watch</a></li>
+                    <li><a href="#">bag</a></li>
+                    <li><a href="#">shoes</a></li>
+                    <li><a href="#">dress</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    
+    <script>
+        const toggleBtn = document.querySelector(".toggle-btn i");
+        const navLinks = document.querySelector(".nav-links");
+        const socialIcons = document.querySelector(".social-icons");
+
+        toggleBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            socialIcons.classList.toggle("active");
+            toggleBtn.classList.toggle("fa-times");
+        });
+    </script>
+</body>
+</html>

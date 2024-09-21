@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.marquee {
+  background-color: #000;
+  color: #fff;
+  padding: 5px 0;
+  font-size: 0.9rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 1001; 
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll 10s linear infinite;
+}
+
+.marquee:hover span {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:#14141454;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  color: #ff3c00;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px; /* Increased logo size */
+  margin-right: 10px;
+  filter: brightness(0) saturate(100%) invert(82%) sepia(27%) saturate(346%) hue-rotate(93deg) brightness(88%) contrast(92%); /* Adjust color */
+}
+
+/* Search Bar */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-bar i {
+  position: absolute;
+  right: 10px;
+  font-size: 1.2rem;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.search-bar i:hover {
+  color: #00c897;
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #db1616;
+  transform: scale(1.1);
+}
+
+
+.toggle-btn {
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.2rem;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #00c897;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .nav-links,
+  .social-icons {
+    position: absolute;
+    top: 100px; 
+    right: -100%;
+    flex-direction: column;
+    background-color: #3333336b;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    gap: 2rem;
+    transition: right 0.3s ease;
+    z-index:999; 
+    
+  }
+  
+
+  .nav-links.active,
+  .social-icons.active {
+    right: 0;
+  }
+
+  .toggle-btn {
+    display: block;
+  }
+}
+
+
+
+body,
+input,
+textarea {
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form {
+  width: 100%;
+  max-width: 820px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 450px;
+ 
+}
+.contact-form {
+  background-color: #c73030;
+  position: relative;
+  
+  
+}
+.circle {
+  border-radius: 50%;
+  background: linear-gradient(135deg, transparent 20%, #ffffff);
+  position: absolute;
+}
+.circle.one {
+  width: 130px;
+  height: 130px;
+  top: 130px;
+  right: -40px;
+}
+.circle.two {
+  width: 80px;
+  height: 80px;
+  top: 10px;
+  right: 30px;
+}
+.contact-form:before {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background-color:  #f52020;
+  transform: rotate(45deg);
+  top: 50px;
+  left: -13px;
+}
+form {
+  padding: 2.3rem 2.2rem;
+  z-index: 10;
+  overflow: hidden;
+  position: relative;
+}
+.title {
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+  margin-top: 8px;
+}
+.input-container {
+  position: relative;
+  margin: 1rem 0;
+
+}
+.input {
+  width: 100%;
+  outline: none;
+  border: 2px solid #fafafa;
+  background: none;
+  padding: 0.6rem 1.2rem;
+  color: #e21c1c;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border-radius: 25px;
+  transition: 0.3s;
+  margin-top: 1px;
+}
+textarea.input {
+  padding: 0.8rem 1.2rem;
+  min-height: 150px;
+  border-radius: 22px;
+  resize: none;
+  overflow-y: auto;
+}
+.input-container label {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  padding: 0 0.4rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 400;
+  pointer-events: none;
+  z-index: 1000;
+  transition: 0.5s;
+}
+.input-container.textarea label {
+  top: 1rem;
+  transform: translateY(0);
+}
+.btn {
+  padding: 0.6rem 1.3rem;
+  background-color: #f54646;
+  border: 2px solid #fafafa;
+  font-size: 0.95rem;
+  color:  #470303;
+  line-height: 1;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 0;
+  margin-top: -30px;
+}
+.btn:hover {
+  background-color: transparent;
+  color: #fff;
+}
+.input-container span {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  padding: 0 0.4rem;
+  color: transparent;
+  pointer-events: none;
+  z-index: 500;
+}
+.input-container span:before,
+.input-container span:after {
+  content: "";
+  position: absolute;
+  width: 10%;
+  opacity: 0;
+  transition: 0.3s;
+  height: 5px;
+  background-color:  #e21c1c;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-container span:before {
+  left: 50%;
+}
+.input-container span:after {
+  right: 50%;
+}
+.input-container.focus label {
+  top: 0;
+  transform: translateY(-50%);
+  left: 25px;
+  font-size: 0.8rem;
+}
+.input-container.focus span:before,
+.input-container.focus span:after {
+  width: 50%;
+  opacity: 1;
+}
+.contact-info {
+  padding: 2.3rem 2.2rem;
+  position: relative;
+}
+.contact-info .title {
+  color:  #e21c1c
+}
+.text {
+  color: #333;
+  margin: 1.5rem 0 2rem 0;
+}
+.information {
+  display: flex;
+  color: #ee5252;
+  margin: 0.7rem 0;
+  align-items: center;
+  font-size: 0.95rem;
+}
+.icon {
+  width: 28px;
+  margin-right: 0.7rem;
+}
+.social-media {
+  padding: 2rem 0 0 0;
+}
+.social-media p {
+  color: #cf4848;
+}
+.social-icons {
+  display: flex;
+  margin-top: 0.5rem;
+}
+.social-icons a {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #420b09, #ff1717);
+  color: #fff;
+  text-align: center;
+  line-height: 35px;
+  margin-right: 0.5rem;
+  transition: 0.3s;
+}
+.social-icons a:hover {
+  transform: scale(1.05);
+}
+.contact-info:before {
+  content: "";
+  position: absolute;
+  width: 110px;
+  height: 100px;
+  border: 22px solid #bc1a1a;
+  border-radius: 50%;
+  bottom: -77px;
+  right: 50px;
+  opacity: 0.3;
+}
+.big-circle {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #e21c1c,  #d331313b);
+  bottom: 50%;
+  right: 50%;
+  transform: translate(-40%, 38%);
+}
+.big-circle:after {
+  content: "";
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  background-color: #fafafa;
+  border-radius: 50%;
+  top: calc(50% - 180px);
+  left: calc(50% - 180px);
+}
+.square {
+  position: absolute;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(181%, 11%);
+  opacity: 0.2;
+}
+@media (max-width: 850px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+  .contact-info:before {
+    bottom: initial;
+    top: -75px;
+    right: 65px;
+    transform: scale(0.95);
+  }
+  .contact-form:before {
+    top: -13px;
+    left: initial;
+    right: 70px;
+  }
+  .square {
+    transform: translate(140%, 43%);
+    height: 350px;
+  }
+  .big-circle {
+    bottom: 75%;
+    transform: scale(0.9) translate(-40%, 30%);
+    right: 50%;
+  }
+  .text {
+    margin: 1rem 0 1.5rem 0;
+  }
+  .social-media {
+    padding: 1.5rem 0 0 0;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+  }
+  .contact-info:before {
+    display: none;
+  }
+  .square,
+  .big-circle {
+    display: none;
+  }
+  form,
+  .contact-info {
+    padding: 1.7rem 1.6rem;
+  }
+  .text,
+  .information,
+  .social-media p {
+    font-size: 0.8rem;
+  }
+  .title {
+    font-size: 1.15rem;
+  }
+  .social-icons a {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .icon {
+    width: 23px;
+  }
+  .input {
+    padding: 0.45rem 1.2rem;
+  }
+  .btn {
+    padding: 0.45rem 1.2rem;
+  }
+}
+#foot {
+  background-color: rgb(221, 46, 46);
+}
+footer {
+  background-color: #00a3cc;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.social-icons a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #007399;
+}
+.footer {
+  background-color: #24262b;
+  padding: 70px 0;
+  color: #ffffff;
+}
+
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer-col h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  background-color: #e91e63;
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #bbbbbb;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 8px;
+}
+
+.footer-col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 574px) {
+  .footer-col {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+    </style>
+  </head>
+  <body>
+    
+    <form action="https://api.web3forms.com/submit" method="POST">
+
+
+        <input type="hidden" name="access_key" value="fb4de174-5d8d-4a75-a3b1-e98b36d6aebc">
+    
+    <div class="container">
+      <span class="big-circle"></span>
+      <img src="img/shape.png" class="square" alt="" />
+      <div class="form">
+        <div class="contact-info">
+          <h3 class="title">Let's get in touch</h3>
+          <p class="text">
+            For immediate assistance or inquiries regarding our ambulance services, Our dedicated team is here to help you 24/7. 
+          </p>
+          <div class="info">
+            <div class="information">
+              <img src="img/location.png" class="icon" alt="" />
+              <p><i class="fa-solid fa-location-crosshairs"></i>  Pakistan</p>
+            </div>
+            <div class="information">
+              <img src="img/email.png" class="icon" alt="" />
+              <p><i class="fa-regular fa-envelope"></i>   zachking9787@gmail.com</p>
+            </div>
+            <div class="information">
+              <img src="img/phone.png" class="icon" alt="" />
+              <p><i class="fa-solid fa-phone"></i>  123-456-789</p>
+            </div>
+          </div>
+          <div class="social-media">
+            <p>Connect with us :</p>
+            <div class="social-icons">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+          <form action="index.html" autocomplete="off">
+            <h3 class="title">Contact us</h3>
+            <div class="input-container">
+              <input type="text" name="name" class="input" required />
+              <label for="">Username</label>
+              <span>Username</span>
+            </div>
+            <div class="input-container">
+              <input type="email" name="email" class="input" required />
+              <label for="">Email</label>
+              <span>Email</span>
+            </div>
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" required />
+              <label for="">Phone</label>
+              <span>Phone</span>
+            </div>
+            <div class="input-container textarea" aria-required="">
+              <textarea name="message" class="input"></textarea>
+              <label for="">Message</label>
+              <span>Message</span>
+            </div>
+            <input type="submit" value="Send" class="btn" required />
+          </form>
+        </div>
+      </div>
+    </div>
+</form>
+
+
+
+    <script>
+        const inputs = document.querySelectorAll(".input");
+function focusFunc() {
+  let parent = this.parentNode;
+  parent.classList.add("focus");
+}
+function blurFunc() {
+  let parent = this.parentNode;
+  if (this.value == "") {
+    parent.classList.remove("focus");
+  }
+}
+inputs.forEach((input) => {
+  input.addEventListener("focus", focusFunc);
+  input.addEventListener("blur", blurFunc);
+});
+    </script>
+  </body>
+</html>
+

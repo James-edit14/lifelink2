@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Hospitals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .hospital-body {
+            background-color: #1A1A1D;
+            color: #ECF0F1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .hospital-container {
+            text-align: center;
+            width: 100%;
+        }
+
+        .hospital-heading {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #E74C3C;
+            animation: hospital-fadeInDown 1s ease-in-out;
+        }
+
+        .hospital-text {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #BDC3C7;
+            animation: hospital-fadeInUp 1s ease-in-out;
+        }
+
+        .hospital-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .hospital-item {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transition: transform 0.5s, box-shadow 0.5s;
+            overflow: hidden;
+        }
+
+        .hospital-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(231, 76, 60, 0.5);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .hospital-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .hospital-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .hospital-item h3 {
+            font-size: 1.8rem;
+            color: #E74C3C;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hospital-item p {
+            font-size: 1rem;
+            color: #ECF0F1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hospital-item p:last-child {
+            font-style: italic;
+            color: #95A5A6;
+        }
+
+        .hospital-btn {
+            padding: 12px 25px;
+            background-color: #E74C3C;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+
+        .hospital-btn:hover {
+            background-color: #C0392B;
+            transform: translateY(-3px);
+        }
+
+        @keyframes hospital-fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes hospital-fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hospital-body">
+        <section id="hospital-section" class="hospital-section">
+            <div class="hospital-container">
+                <h2 class="hospital-heading">Hospitals We Partner With</h2>
+                <p class="hospital-text">Our service is partnered with top hospitals in the region to ensure you receive the best care possible.</p>
+                <div class="hospital-grid">
+                    <div class="hospital-item">
+                        <h3 class="hospital-heading">City General Hospital</h3>
+                        <p>Providing world-class healthcare with state-of-the-art facilities.</p>
+                        <p>Location: 123 Main Street, City</p>
+                        <p>Contact: (123) 456-7890</p>
+                    </div>
+                    <div class="hospital-item">
+                        <h3 class="hospital-heading">Green Valley Clinic</h3>
+                        <p>Specialized in emergency and trauma care, available 24/7.</p>
+                        <p>Location: 456 Elm Street, City</p>
+                        <p>Contact: (123) 456-7891</p>
+                    </div>
+                    <div class="hospital-item">
+                        <h3 class="hospital-heading">Downtown Medical Center</h3>
+                        <p>Offering comprehensive care for all medical conditions.</p>
+                        <p>Location: 789 Oak Street, City</p>
+                        <p>Contact: (123) 456-7892</p>
+                    </div>
+                    <div class="hospital-item">
+                        <h3 class="hospital-heading">Redwood Health Facility</h3>
+                        <p>Specialists in urgent care and complex surgeries.</p>
+                        <p>Location: 101 Pine Street, City</p>
+                        <p>Contact: (123) 456-7893</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

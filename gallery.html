@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>responsive Image Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body {
+            background-color: #ddd;
+            padding: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            display: inline-block;
+        }
+        .gallery {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-auto-rows: 200px;
+            grid-auto-flow: dense;
+        }
+        .gallery > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gallery > div > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .gallery .tall {
+            grid-row: span 2;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="gallery">
+        <div class="image-container">
+            <img src="i.webp">
+        </div>
+        <div class="image-container">
+            <img src="i (12).webp">
+        </div>
+        <div class="image-container tall">
+            <img src="i (11).webp">
+        </div>
+        <div class="image-container">
+            <img src="i (10).webp">
+        </div>
+        <div class="image-container">
+            <img src="i (9).webp">
+        </div>
+        <div class="image-container tall">
+            <img src="i (7).webp">
+        </div>
+        <div class="image-container">
+            <img src="i (6).webp">
+        </div>
+        <div class="image-container">
+            <img src="i (5).webp">
+        </div>
+        <div class="image-container">
+            <img src="i (4).webp">
+        </div>
+        <div class="image-container">
+            <img src="i (1).webp">
+        </div>
+        <div class="image-container tall">
+            <img src="i (12).webp">
+        </div>
+        <div class="image-container tall">
+            <img src="12.jpg">
+        </div>
+        <div class="image-container">
+            <img src="13.jpg">
+        </div>
+        <div class="image-container">
+            <img src="14.jpg">
+        </div>
+        <div class="image-container tall">
+            <img src="15.jpg">
+        </div>
+        <div class="image-container tall">
+            <img src="16.jpg">
+        </div>
+        <div class="grid-item">
+            <img src="17.jpg">
+        </div>
+        <div class="image-container tall">
+            <img src="18.jpg">
+        </div>
+        <div class="image-container tall">
+            <img src="19.jpg">
+        </div>
+        <div class="image-container tall">
+            <img src="20.jpg">
+        </div>
+        <div class="image-container">
+            <img src="21.jpg">
+        </div>
+        <div class="image-container tall">
+            <img src="22.jpg">
+        </div>
+        <div class="image-container">
+            <img src="23.jpg">
+        </div>
+        <div class="image-container">
+            <img src="24.jpg">
+        </div>
+        <div class="image-container">
+            <img src="25.jpg">
+        </div>
+    </div>
+
+    <script>
+        // function openModal(imageSrc) {
+//     const modal = document.getElementById("modal");
+//     const modalImage = document.getElementById("modalImage");
+
+//     modal.style.display = "block";
+//     modalImage.src = imageSrc;
+// }
+
+// function closeModal() {
+//     const modal = document.getElementById("modal");
+//     modal.style.display = "none";
+// }
+    </script>
+</body>
+</html>
+

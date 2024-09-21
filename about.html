@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Our Services</title>
+    <style>
+        /* Google Fonts Link */
+        @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Nunito", sans-serif;
+        }
+        .marquee {
+          background-color: #000;
+          color: #fff;
+          padding: 5px 0;
+          font-size: 0.9rem;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          white-space: nowrap;
+          width: 100%;
+          z-index: 1001;
+        }
+    
+        .marquee span {
+          display: inline-block;
+          padding-left: 100%;
+          animation: scroll 10s linear infinite;
+        }
+    
+        .marquee:hover span {
+          animation-play-state: paused;
+        }
+    
+        @keyframes scroll {
+          0% {
+            transform: translateX(100%);
+          }
+    
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+    
+    
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #14141454;
+          padding: 1rem 2rem;
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          width: 100%;
+          transition: all 0.3s ease;
+        }
+    
+        .logo {
+          color: #ff3c00;
+          font-size: 2rem;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+        }
+    
+        .logo img {
+          height: 50px;
+          margin-right: 10px;
+          filter: brightness(0) saturate(100%) invert(82%) sepia(27%) saturate(346%) hue-rotate(93deg) brightness(88%) contrast(92%);
+         
+        }
+    
+    
+        .search-bar {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+    
+        .search-bar input {
+          padding: 0.6rem 2.5rem 0.6rem 1rem;
+          border: none;
+          border-radius: 20px;
+          outline: none;
+          font-size: 1rem;
+        }
+    
+        .search-bar i {
+          position: absolute;
+          right: 10px;
+          font-size: 1.2rem;
+          color: #666;
+          cursor: pointer;
+          transition: color 0.3s;
+        }
+    
+        .search-bar i:hover {
+          color: #00c897;
+        }
+    
+    
+        .nav-links {
+          display: flex;
+          list-style: none;
+          gap: 2rem;
+        }
+    
+        .nav-links li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 1rem;
+          transition: color 0.3s, transform 0.3s;
+        }
+    
+        .nav-links li a:hover {
+          color: #db1616;
+          transform: scale(1.1);
+        }
+    
+    
+        .toggle-btn {
+          display: none;
+          font-size: 1.8rem;
+          color: #fff;
+          cursor: pointer;
+        }
+    
+    
+        .social-icons {
+          display: flex;
+          gap: 1.5rem;
+        }
+    
+        .social-icons a {
+          color: #fff;
+          font-size: 1.2rem;
+          transition: transform 0.3s, color 0.3s;
+        }
+    
+        .social-icons a:hover {
+          color: #00c897;
+          transform: scale(1.2);
+        }
+    
+    
+        @media (max-width: 768px) {
+          .nav-links {
+            position: absolute;
+            top: 100px;
+            right: -100%;
+            flex-direction: column;
+            background-color: #3333336b;
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            gap: 2rem;
+            transition: right 0.3s ease;
+            z-index: 999;
+    
+          }
+    
+    
+          .nav-links.active,
+          .social-icons.active {
+            right: 0;
+          }
+    
+          .toggle-btn {
+            display: block;
+          }
+        }
+    
+    
+        
+
+        .theme-text {
+            color: #c72121;
+        }
+
+        .card-img-top {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: transform 0.5s;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            left: -100%;
+            top: 0;
+            background: rgba(199, 33, 33, 0.8);
+            width: 100%;
+            height: 100%;
+            transition: 0.5s;
+            z-index: -1;
+            border-radius: 15px;
+        }
+
+        .card:hover::before {
+            left: 0;
+        }
+
+        .container-fluid {
+            background-image: url("blob-scene-haikei.svg");
+            background-position: center;
+            background-size: cover;
+            padding: 50px 0;
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+        }
+
+        h3 {
+            transition: color 0.3s;
+        }
+
+        .card:hover h3 {
+            color: #ffe600; /* Change color on hover */
+        }
+
+        p {
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover p {
+            opacity: 1;
+        }
+
+        .btn-book {
+            background-color: #c72121;  
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-book:hover {
+            background-color: #a31212; 
+        }
+        .container{
+          max-width: 1170px;
+          margin:auto;
+        }
+        .row{
+          display: flex;
+          flex-wrap: wrap;
+        }
+        ul{
+          list-style: none;
+        }
+        .footer{
+          background-color: #2b2a2a;
+            padding: 70px 0;
+        }
+        .footer-col{
+           width: 25%;
+           padding: 0 15px;
+        }
+        .footer-col h4{
+          font-size: 18px;
+          color: #ffffff;
+          text-transform: capitalize;
+          margin-bottom: 35px;
+          font-weight: 500;
+          position: relative;
+        }
+        .footer-col h4::before{
+          content: '';
+          position: absolute;
+          left:0;
+          bottom: -10px;
+          background-color: #e91e63;
+          height: 2px;
+          box-sizing: border-box;
+          width: 50px;
+        }
+        .footer-col ul li:not(:last-child){
+          margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+          font-size: 16px;
+          text-transform: capitalize;
+          color: #ffffff;
+          text-decoration: none;
+          font-weight: 300;
+          color: #bbbbbb;
+          display: block;
+          transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+          color: #ffffff;
+          padding-left: 8px;
+        }
+        .footer-col .social-links a{
+          display: inline-block;
+          height: 40px;
+          width: 40px;
+          background-color: rgba(173, 42, 42, 0.2);
+          margin:0 10px 10px 0;
+          text-align: center;
+          line-height: 40px;
+          border-radius: 50%;
+          color: #ffffff;
+          transition: all 0.5s ease;
+        }
+        .footer-col .social-links a:hover{
+          color: #24262b;
+          background-color: #ffffff;
+        }
+        
+    
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+         /* Main Container */
+         .about-container {
+          padding: 50px 20px;
+          max-width: 1200px;
+          margin: 0 auto;
+          text-align: center;
+      }
+
+      /* Title Section */
+      .about-title {
+          font-size: 3rem;
+          color: #E74C3C;
+          margin-bottom: 20px;
+          position: relative;
+          animation: fadeInDown 1s ease-in-out;
+      }
+
+      /* Subtitle with Line Effect */
+      .about-subtitle {
+          font-size: 1.5rem;
+          margin-bottom: 40px;
+          color: #FADBD8;
+          position: relative;
+      }
+
+      .about-subtitle::before, .about-subtitle::after {
+          content: '';
+          width: 80px;
+          height: 2px;
+          background-color: #E74C3C;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          animation: lineGrow 1s ease-in-out;
+      }
+
+      .about-subtitle::before {
+          left: -100px;
+      }
+
+      .about-subtitle::after {
+          right: -100px;
+      }
+
+      /* Content Section */
+      .about-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .about-image {
+          width: 100%;
+          max-width: 500px;
+          animation: fadeInLeft 1.2s ease-in-out;
+      }
+
+      .about-text {
+          font-size: 1.2rem;
+          color: #000000;
+          line-height: 1.8;
+          text-align: left;
+          animation: fadeInRight 1.2s ease-in-out;
+      }
+
+      .about-text h2 {
+          color: #E74C3C;
+          font-size: 2rem;
+          margin-bottom: 20px;
+          position: relative;
+      }
+
+      /* Button */
+      .btn4 {
+          display: inline-block;
+          padding: 12px 30px;
+          background-color: #E74C3C;
+          color: #fff;
+          font-size: 1.2rem;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: transform 0.3s ease, background-color 0.3s ease;
+          margin-top: 20px;
+      }
+
+      .btn4:hover {
+          background-color: #C0392B;
+          transform: translateY(-5px);
+      }
+
+      /* Team Section */
+      .team-section {
+          margin-top: 80px;
+          text-align: center;
+      }
+
+      .team-title {
+          font-size: 2.5rem;
+          color: #E74C3C;
+          margin-bottom: 20px;
+      }
+
+      .team-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+      }
+
+      .team-card {
+          background-color: #aa3535;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+          text-align: center;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          margin-bottom: 20%;
+      }
+
+      .team-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+      }
+
+      .team-card img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          margin-bottom: 20px;
+          transition: transform 0.3s ease;
+      }
+
+      .team-card:hover img {
+          transform: rotate(10deg);
+      }
+
+      .team-card h3 {
+          color: #E74C3C;
+          margin-bottom: 10px;
+      }
+
+      .team-card p {
+          color: #ECF0F1;
+          font-size: 1rem;
+      }
+
+      /* Animation Keyframes */
+      @keyframes fadeInDown {
+          0% {
+              opacity: 0;
+              transform: translateY(-30px);
+          }
+          100% {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      @keyframes fadeInLeft {
+          0% {
+              opacity: 0;
+              transform: translateX(-50px);
+          }
+          100% {
+              opacity: 1;
+              transform: translateX(0);
+          }
+      }
+
+      @keyframes fadeInRight {
+          0% {
+              opacity: 0;
+              transform: translateX(50px);
+          }
+          100% {
+              opacity: 1;
+              transform: translateX(0);
+          }
+      }
+
+      @keyframes lineGrow {
+          0% {
+              width: 0;
+          }
+          100% {
+              width: 80px;
+          }
+      }
+
+      /* Smooth Scrolling */
+      html {
+          scroll-behavior: smooth;
+      }
+
+      /* Responsiveness */
+      @media (max-width: 768px) {
+          .about-content {
+              grid-template-columns: 1fr;
+          }
+      }
+    
+    </style>
+</head>
+<body>
+
+    <div class="marquee">
+        <span>WE OFFER OF ALL TYPES AUMBULANCE</span>
+      </div>
+  
+      <header>
+        <nav class="navbar">
+          
+          <div class="logo">
+            <img src="image-removebg-preview (2).png" alt="LifeLink Logo" />
+            LifeLink
+          </div>
+  
+    
+          <div class="search-bar">
+            <input type="text" placeholder="Search..." />
+            <i class="fa fa-search"></i>
+          </div>
+  
+         
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+  
+         
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+  
+         
+          <div class="toggle-btn">
+            <i class="fa fa-bars"></i>
+          </div>
+        </nav>
+      </header>
+  
+    <div class="container-fluid">
+        <h1 class="text-center mt-5 display-3 fw-bold">About <span class="theme-text">Us</span></h1>
+        <hr class="mx-auto mb-5 w-25">
+        <div class="row mb-5">
+    
+            <div class="col-12 col-sm-6 col-md-3 m-auto">
+                <div class="card shadow">
+                    <img src="i (1).webp" alt="" class="card-img-top">
+                    
+                    <div class="card-body">
+                      
+                        <h3 class="text-center">Paramedic Ambulance</h3>
+                        <hr class="mx-auto w-75">
+                        <p>
+                            Equipped with trained paramedics and advanced medical equipment, these ambulances provide immediate assistance in critical situations.
+                        </p>
+                       <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 m-auto">
+                <div class="card shadow">
+                    <img src="image.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="text-center">Basic Life Support (BLS) Ambulance</h3>
+                        <hr class="mx-auto w-75">
+                        <p>
+                            BLS ambulances provide basic medical care for non-emergency situations, staffed with personnel to deliver initial medical aid.
+                        </p>
+                        <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 m-auto">
+                <div class="card shadow">
+                    <img src="images (1).png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="text-center">Advanced Life Support (ALS) Ambulance</h3>
+                        <hr class="mx-auto w-75">
+                        <p>
+                            ALS ambulances are equipped for complex medical situations, staffed with trained personnel capable of advanced care.
+                        </p>
+                        <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 m-auto">
+                <div class="card shadow">
+                    <img src="52781785518_2efa6996aa_h.jpg" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="text-center">Neonatal Ambulance</h3>
+                        <hr class="mx-auto w-75">
+                        <p>
+                            Specifically designed for transporting newborns, these ambulances are equipped with specialized equipment and trained professionals.
+                        </p>
+                        <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class="col-12 col-sm-6 col-md-3 m-auto">
+                <div class="card shadow">
+                    <img src="images (2).png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="text-center">Emergency Medical Services</h3>
+                        <hr class="mx-auto w-75">
+                        <p>
+                            Rapid response units trained to handle emergencies, providing life-saving care at the scene.
+                        </p>
+                        <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 m-auto">
+                <div class="card shadow">
+                    <img src="i (12).webp" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="text-center">Air Ambulance Services</h3>
+                        <hr class="mx-auto w-75">
+                        <p>
+                            Air ambulances for quick transportation to advanced medical facilities, especially in remote areas.
+                        </p>
+                        <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-container">
+              <h1 class="about-title">About Our Emergency Services</h1>
+              <p class="about-subtitle">Saving Lives, Every Second Matters</p>
+              <div class="about-content">
+                  <img src="i (8).webp" alt="Ambulance Image" class="about-image">
+                  <div class="about-text">
+                      <h2>Committed to Providing Rapid Response</h2>
+                      <p>Our emergency ambulance services are dedicated to providing immediate medical care and transportation during critical situations. Equipped with state-of-the-art ambulances, our highly trained paramedics and medical professionals are available 24/7 to ensure timely support. We collaborate with top hospitals and clinics to offer comprehensive medical services, ensuring that you receive the best possible care.</p>
+                      <p>Whether it's a road accident, cardiac emergency, or any life-threatening situation, we prioritize your safety and health by providing prompt, reliable, and professional care.</p>
+                      <a href="#team" class="btn4">Meet Our Team</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3 m-auto">
+            <div class="card shadow">
+                <img src="images (3).png" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="text-center">Patient Transport Services</h3>
+                    <hr class="mx-auto w-75">
+                    <p>
+                        Non-emergency transport for patients needing to visit clinics or hospitals for appointments.
+                    </p>
+                    <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3 m-auto">
+            <div class="card shadow">
+                <img src="images (4).png" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="text-center">Specialized Medical Care</h3>
+                    <hr class="mx-auto w-75">
+                    <p>
+                        Tailored services for patients with specific medical needs during transport.
+                    </p>
+                    <a href="booknowform.html"> <button class="btn btn-book mt-3">Book Now</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+      
+          <!-- Team Section -->
+          <div id="team" class="team-section">
+              <h2 class="team-title">Our Dedicated Team</h2>
+              <div class="team-grid">
+                  <div class="team-card">
+                      <img src="i (6).webp" alt="Team Member">
+                      <h3>Dr. Sarah Lee</h3>
+                      <p>Chief Medical Officer</p>
+                  </div>
+                  <div class="team-card">
+                      <img src="i (6).webp" alt="Team Member">
+                      <h3>John Doe</h3>
+                      <p>Senior Paramedic</p>
+                  </div>
+                  <div class="team-card">
+                      <img src="i (6).webp" alt="Team Member">
+                      <h3>Michael Smith</h3>
+                      <p>Ambulance Driver</p>
+                  </div>
+                  <div class="team-card">
+                      <img src="i (6).webp" alt="Team Member">
+                      <h3>Emma Brown</h3>
+                      <p>Head Nurse</p>
+                  </div>
+              </div>
+          </div>
+      
+
+           
+          <div class="fotterr">
+            <footer class="footer">
+               <div class="container">
+                 <div class="row">
+                   <div class="footer-col">
+                     <h4>company</h4>
+                     <ul>
+                       <li><a href="#">about us</a></li>
+                       <li><a href="#">our services</a></li>
+                       <li><a href="#">privacy policy</a></li>
+                       <li><a href="#">affiliate program</a></li>
+                     </ul>
+                   </div>
+                   <div class="footer-col">
+                     <h4>get help</h4>
+                     <ul>
+                       <li><a href="#">FAQ</a></li>
+                       <li><a href="#">shipping</a></li>
+                       <li><a href="#">returns</a></li>
+                       <li><a href="#">order status</a></li>
+                       <li><a href="#">payment options</a></li>
+                     </ul>
+                   </div>
+                   <div class="footer-col">
+                     <h4>online shop</h4>
+                     <ul>
+                       <li><a href="#">watch</a></li>
+                       <li><a href="#">bag</a></li>
+                       <li><a href="#">shoes</a></li>
+                       <li><a href="#">dress</a></li>
+                     </ul>
+                   </div>
+                   <div class="footer-col">
+                     <h4>follow us</h4>
+                     <div class="social-links">
+                       <a href="#"><i class="fab fa-facebook-f"></i></a>
+                       <a href="#"><i class="fab fa-twitter"></i></a>
+                       <a href="#"><i class="fab fa-instagram"></i></a>
+                       <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+            </footer>
+          </div>
+          
+
+
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+        <script>
+          const toggleBtn = document.querySelector(".toggle-btn i");
+          const navLinks = document.querySelector(".nav-links");
+          const socialIcons = document.querySelector(".social-icons");
+        
+          toggleBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            socialIcons.classList.toggle("active");
+            toggleBtn.classList.toggle("fa-times");
+          });
+        
+          function validateAndRedirect(event) {
+            event.preventDefault();
+            let locationInput = document.getElementById("location");
+            let loc = locationInput.value.trim();
+            if (loc === "") {
+              alert("Please input this field");
+              return false;
+            } else {
+        
+              window.location.href = 'booknowform.html';
+            }
+          }
+          document.getElementById("btn").addEventListener("click", validateAndRedirect)
+        
+          document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Thank you, ${name}, for reaching out to us. We will respond to you shortly.`);
+            document.getElementById('contactForm').reset();
+          });
+        
+        
+          var faqQuestions = document.getElementsByClassName("question");
+        
+          for (var i = 0; i < faqQuestions.length; i++) {
+            faqQuestions[i].addEventListener("click", function () {
+              this.classList.toggle("active");
+              this.parentElement.classList.toggle("active");
+        
+              var faqContent = this.nextElementSibling;
+              if (faqContent.style.display === "block") {
+                faqContent.style.display = "none";
+              } else {
+                faqContent.style.display = "block";
+              }
+        
+        
+              var icon = this.querySelector(".icon");
+              if (this.classList.contains("active")) {
+                icon.classList.replace("fa-chevron-down", "fa-times");
+              } else {
+                icon.classList.replace("fa-times", "fa-chevron-down");
+              }
+            });
+          }
+        
+        
+        
+            
+        </script>
+</body>
+</html>
